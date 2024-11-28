@@ -201,6 +201,11 @@ tgt_again:
 	errcode = retval + ERROR_TABLE_BASE_krb5;
 	goto cleanup;
     }
+    if (sprinc == NULL) {
+        status = "NULL_SERVER";
+        errcode = KRB5KDC_ERR_S_PRINCIPAL_UNKNOWN;
+        goto cleanup;
+    }
 
     /*
      * We pick the session keytype here....
