@@ -212,6 +212,11 @@ process_tgs_req(struct server_handle *handle, krb5_data *pkt,
         status = "FIND_FAST";
         goto cleanup;
     }
+    if (sprinc == NULL) {
+        status = "NULL_SERVER";
+        errcode = KRB5KDC_ERR_S_PRINCIPAL_UNKNOWN;
+        goto cleanup;
+    }
 
     errcode = get_local_tgt(kdc_context, &sprinc->realm, header_server,
                             &local_tgt, &local_tgt_storage);
