@@ -310,6 +310,7 @@ bool_t xdr_krb5_tl_data(XDR *xdrs, krb5_tl_data **tl_data_head)
 		    return FALSE;
 	       tl = tl->tl_data_next;
 	  }
+	  *tl_data_head = NULL;
 	  break;
 
      case XDR_DECODE:
@@ -984,6 +985,7 @@ xdr_krb5_principal(XDR *xdrs, krb5_principal *objp)
     case XDR_FREE:
 	if(*objp != NULL) 
 	    krb5_free_principal(context, *objp);
+	*objp = NULL;
 	break;
     }
     return TRUE;
