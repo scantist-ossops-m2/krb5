@@ -201,6 +201,11 @@ process_tgs_req(struct server_handle *handle, krb5_data *pkt,
         status = "GENERATE_TICKET_ID";
         goto cleanup;
     }
+    if (sprinc == NULL) {
+        status = "NULL_SERVER";
+        errcode = KRB5KDC_ERR_S_PRINCIPAL_UNKNOWN;
+        goto cleanup;
+    }
 
     scratch.length = pa_tgs_req->length;
     scratch.data = (char *) pa_tgs_req->contents;
