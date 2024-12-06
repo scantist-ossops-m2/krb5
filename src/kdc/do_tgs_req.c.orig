@@ -195,11 +195,6 @@ process_tgs_req(struct server_handle *handle, krb5_data *pkt,
         status = "kdc_find_fast";
         goto cleanup;
     }
-    if (sprinc == NULL) {
-        status = "NULL_SERVER";
-        errcode = KRB5KDC_ERR_S_PRINCIPAL_UNKNOWN;
-        goto cleanup;
-    }
 
     /*
      * Pointer to the encrypted part of the header ticket, which may be
